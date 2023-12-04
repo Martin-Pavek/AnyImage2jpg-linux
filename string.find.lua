@@ -28,3 +28,5 @@ end
 end
 
 print('znak "." nalezen na  pozici '..nalezeno)
+
+
