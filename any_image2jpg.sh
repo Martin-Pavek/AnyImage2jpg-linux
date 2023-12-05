@@ -7,7 +7,6 @@ pripony_obrazku = {"png","tif","jpeg","pcx","bmp","gif","tiff","PNG","TIF","JPEG
 -- lua nejni case sensitive jako PS takze i velke nazvy pripon
 
 files = {}
---renames = {" "}
 renames = {}
 pocitadlo = 1
 
@@ -19,7 +18,6 @@ end
 Hnd:close()
 end
 
-
 znak_rozdelovac = "."
 
 --print(string.find(file , ".")) --nefunguje funkce string.find kdyz se hleda znak "." ???
@@ -27,20 +25,16 @@ znak_rozdelovac = "."
 
 for aa = 1,#files do
 file = files[aa]
---print(file)
 
 for bb=1,#file do
 -- nahrada za string.find(file , ".") viz vise
 znak=string.sub(file,bb,bb)
---print(bb.." "..znak)
 
 if znak == znak_rozdelovac then
 
 file_name = string.sub(file,1,bb-1)
---print(file_name.."<")
 
 file_pripona = string.sub(file,bb+1,#file)
---print(file_pripona.."<<")
 
 -- hleda priponi podle pole pripon
 for cc = 1,#pripony_obrazku do
@@ -51,20 +45,17 @@ nasel=0
 for dd = 1,#renames do
 if file_name == renames[dd] then
 nasel = nasel + 1
---print("nasel")
---print(nasel.."-")
-end -- if file_nasel
-end -- for dd
+end
+end
 
 -- nasel v poly renames ?
-
 if nasel > 0 then
 print(pocitadlo..") ".."'"..file.."' --> '"..file_name.."("..nasel..").jpg'")
 cmd_1="convert '"..file.."' '"..file_name.."("..nasel..").jpg'"
 else
 print(pocitadlo..") ".."'"..file.."' --> '"..file_name..".jpg'")
 cmd_1="convert '"..file.."' '"..file_name..".jpg'"
-end -- if nasel
+end
 
 --print(cmd_1)
 os.execute(cmd_1)
@@ -74,23 +65,14 @@ if arg[1] == "-delete" then
 cmd_2="rm -f '"..file.."'"
 --print(cmd_2)
 os.execute(cmd_2)
-end -- if arg[1]
-
+end
 
 table.insert(renames, file_name)
 pocitadlo=pocitadlo + 1
 
-end -- if file_pripona
-
-end -- cc
-
-end -- if znak
-
-end --bb
-
-end -- aa
-
---
-
-
+end
+end
+end
+end
+end
 
